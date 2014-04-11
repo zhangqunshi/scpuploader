@@ -28,7 +28,8 @@ public class SCP {
             boolean isAuthed = con.authenticateWithPassword(usr, pwd);
             System.out.println("isAuthed: " + isAuthed);
 
-            
+            localFile = localFile.trim();
+            remotePath = remotePath.trim();
             File srcFilePath = new File(localFile);
             if (srcFilePath.isDirectory()) {
                 putDir(con, localFile, remotePath, "0644");
