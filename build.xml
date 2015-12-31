@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="scpuploader" default="test" basedir=".">
+<property name="src" value="src"/>
+<property name="dest" value="dest"/>
+<property name="scpuploaderjar" value="${dest}/jar/scpuploader.jar"/>
+<target name="init">
+   <mkdir dir="${dest}/classes"/>
+   <mkdir dir="${dest}/jar"/>
+</target>
+<target name="compile" depends="init">
+   <javac srcdir="${src}" destdir="${dest}/classes" encoding="UTF-8">
+	<classpath path="libs/ganymed-ssh2-build210.jar"/>   
+   </javac>
+</target>
+<target name="build" depends="compile">
+   <jar jarfile="${scpuploaderjar}" basedir="${dest}/classes" />
+</target>
+<target name="test" depends="build">
+   <java classname="uploader.ScpUI">
+	<classpath path="${scpuploaderjar}"/>
+	<classpath path="libs/ganymed-ssh2-build210.jar"/>  
+   </java>
+</target>
+<target name="clean">
+   <delete dir="${dest}" />
+</target>
+</project>
